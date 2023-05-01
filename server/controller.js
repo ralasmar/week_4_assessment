@@ -1,3 +1,6 @@
+const userDatabase = []
+let id = 0
+
 module.exports = {
 
     getCompliment: (req, res) => {
@@ -15,7 +18,45 @@ module.exports = {
         let random = Math.floor(Math.random() * fortunes.length);
         let fortune = fortunes[random];
         res.status(200).send(fortune);
-        
     },
 
+    selfCareGenerator: (req, res) => {
+        const suggestions = ['Try meditation', 'Go on a walk', 'Take a hot bath', 'Listen to your favorite song', 'Explore your creativity', 'Call a friend', 'Drink a glass of water', 'Enjoy a snack', 'Give yourself affirmations']
+
+        let random = Math.floor(Math.random() * suggestions.length);
+        let suggestion = suggestions[random];
+        res.status(200).send(suggestion)
+    },
+
+    postAffirmation: (req, res) => {
+        let {affirmation} = req.body.affirmation; 
+        res.status(200).send(`Daily affirmation: ${affirmation}`)
+    },
+
+
+    joinEmail: (req, res) => {
+        let { email } = req.body
+        let newUser = {...req.body, id: id };
+        userDatabase.push(newUser);
+        id++
+        res.status(200).send(newUser)
+    },
+
+    deleteEmail: (req, res) => {
+        let  existingEmail  = req.params.email
+        for (let i=0; i<userDatabase.length; i++){
+            if (userDatabase[i].email === existingEmail) {
+                userDatabase.splice(i,1)
+                res.status(200).send('User Unsubscribed')
+                return
+            }
+        }
+        res.status(400).send('User not found')
+    },
+
+    updateCatPhoto: (req, res) => {
+        let {image} = req.body
+        res.status(200).send('photo updated')
+    },
+    
 }
