@@ -45,10 +45,10 @@ module.exports = {
 
     deleteEmail: (req, res) => {
         let  existingEmail  = req.params.email
-        for (let i=0; i<userDatabase.length; i++){
+        for (let i=0; i<=userDatabase.length; i++){
             if (userDatabase[i].email === existingEmail) {
                 userDatabase.splice(i,1)
-                res.status(200).send('User Unsubscribed')  
+                res.status(200).send(`User Unsubscribed`)  
             } else {
                 res.status(400).send('User not found')
             }

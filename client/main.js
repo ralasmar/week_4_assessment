@@ -74,7 +74,8 @@ const deleteEmail = (event) => {
             alert('successfully unsubscribed')
             console.log(data)
         })
-        .catch(err => console.log(err));
+        .catch(err => console.log('Could not find user'));
+            
 };
 
 const updateCatPhoto = (event) => {
