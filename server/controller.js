@@ -29,8 +29,9 @@ module.exports = {
     },
 
     postAffirmation: (req, res) => {
-        let {affirmation} = req.body.affirmation; 
+        let {affirmation} = req.body; 
         res.status(200).send(`Daily affirmation: ${affirmation}`)
+        return affirmation
     },
 
 
@@ -47,11 +48,11 @@ module.exports = {
         for (let i=0; i<userDatabase.length; i++){
             if (userDatabase[i].email === existingEmail) {
                 userDatabase.splice(i,1)
-                res.status(200).send('User Unsubscribed')
-                return
+                res.status(200).send('User Unsubscribed')  
+            } else {
+                res.status(400).send('User not found')
             }
         }
-        res.status(400).send('User not found')
     },
 
     updateCatPhoto: (req, res) => {
